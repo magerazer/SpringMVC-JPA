@@ -12,6 +12,8 @@ public interface CompteDAO {
 	@Transactional(rollbackFor={Exception.class})
 	void insert (Compte a) throws Exception;
 
-	List<Compte> select();
+	List<Compte> selectAll();
+	Compte select(String str);
+	
 	
 }

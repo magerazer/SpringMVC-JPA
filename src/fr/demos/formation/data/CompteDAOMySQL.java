@@ -79,7 +79,7 @@ public class CompteDAOMySQL implements CompteDAO {
 	}
 	
 	@Override
-	public List<Compte> select() {
+	public List<Compte> selectAll() {
 		// TODO Auto-generated method stub
 		Compte c = null;
 
@@ -109,6 +109,12 @@ public class CompteDAOMySQL implements CompteDAO {
 		}
 
 		return comptes;
+	}
+
+	@Override
+	public Compte select(String str) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

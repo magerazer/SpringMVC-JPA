@@ -43,7 +43,11 @@
 		</tr>
 		</table>
 	</form:form>
-	
+	<form action="rechercherCompteParId.htm" method="get">
+		<label>mail</label><input type="text" name="mail" />
+		<input type="submit" name="rechercher" ></input>
+	</form>
+
 	<a href="english.htm">english</a>
 	<a href="french.htm">french</a>
 <br>

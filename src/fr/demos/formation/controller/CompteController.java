@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.LocaleResolver;
 
@@ -78,7 +79,7 @@ public class CompteController {
 			List<Compte> comptes = new ArrayList();
 		
 			try {
-				comptes = compteDao.select();
+				comptes = compteDao.selectAll();
 			} catch (Exception e) {				
 				e.printStackTrace();
 			}
@@ -88,6 +89,26 @@ public class CompteController {
 				
 	}
 	
+	
+	@RequestMapping(value = "/rechercherCompteParId.htm", method = RequestMethod.GET)
+	public String rechercheCompte(ModelMap model, @RequestParam(name="mail") String mail) {
+			// appel du find dans le dao
+			// recup du Compte, on le stocke dans le model
+			Compte compte = new Compte();
+		
+			try {
+				compte = compteDao.select(mail);
+			} catch (Exception e) {				
+				e.printStackTrace();
+			}
+			if(compte != null)
+				model.addAttribute("compte", compte);
+			else {
+				model.addAttribute("compte", new Compte());
+			}
+			return "saisieCompte";
+				
+	}
 	
 	@RequestMapping(value = "/english.htm", method = RequestMethod.GET)
 	public String english(HttpServletRequest request, HttpServletResponse response) {
