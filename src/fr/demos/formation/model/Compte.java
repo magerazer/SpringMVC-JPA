@@ -23,8 +23,7 @@ public class Compte {
 	private String nom;
 	private String prenom;
 	
-	@Transient
-	@Min(1)
+	@Transient	
 	private int age;
 	
 	@Id

@@ -17,12 +17,15 @@ public class CompteDAOMySQLJPA implements CompteDAO {
 	@PersistenceContext
 	private EntityManager em;
 	
-	@Override
+	// annotation @Transactional gère la transaction par AOP
+	@Override	
 	@Transactional
 	public void insert(Compte a) throws Exception {
-				
+		// 1 : la méthode étant marquée transactionnelle, begin
+		// 2 : persist place dans le contexte un nouvel objet (pas encore en base)		
 		em.merge(a);
-
+		// 3 : flush (insert dans la base) du contexte automatique avant le commit
+		// 4 : la méthode étant marquée transactionnelle, commit ou rollback
 	}
 
 	@Override
