@@ -1,14 +1,15 @@
 package fr.demos.formation.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -35,6 +36,12 @@ public class Compte {
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private LocalDate anneeNaissance;
 	
+	
+	@JoinColumn(name="compteId")
+	@OneToMany()	
+	private Collection<Adresse> adresses = new ArrayList<Adresse>();
+	
+	
 	public Compte() {
 	}
 	
@@ -44,6 +51,13 @@ public class Compte {
 		this.prenom = prenom;
 		this.anneeNaissance = anneeNaissance;
 	}
+
+	public void addAdresse(Adresse a) {
+		adresses.add(a);
+	}
+	
+	
+	
 
 	public LocalDate getAnneeNaissance() {
 		return anneeNaissance;

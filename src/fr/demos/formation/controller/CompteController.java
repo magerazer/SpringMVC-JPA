@@ -1,5 +1,7 @@
 package fr.demos.formation.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.LocaleResolver;
 
 import fr.demos.formation.data.CompteDAO;
+import fr.demos.formation.model.Adresse;
 import fr.demos.formation.model.Compte;
 
 
@@ -108,6 +111,25 @@ public class CompteController {
 			}
 			return "saisieCompte";
 				
+	}
+	
+	@RequestMapping(value = "/adresses.htm", method = RequestMethod.GET)
+	public void essaiHibernate() {
+		
+		Compte c = new Compte("vv@free.fr", "vv", "vv", LocalDateTime.now().toLocalDate());
+		Adresse a1 = new Adresse("2 rue napoleon", 75015, "Paris", "France");
+		Adresse a2 = new Adresse("3 rue bonaparte", 92400, "Courbevoie", "France");
+	
+		c.addAdresse(a1);
+		c.addAdresse(a2);
+		
+		try {
+			compteDao.insert(c);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
 	}
 	
 	@RequestMapping(value = "/english.htm", method = RequestMethod.GET)
