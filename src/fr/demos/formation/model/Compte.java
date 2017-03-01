@@ -4,8 +4,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,6 +22,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table (name="compte")
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Compte {
 
 	@Size(min=1, max=15)
@@ -37,8 +42,10 @@ public class Compte {
 	private LocalDate anneeNaissance;
 	
 	
-	@JoinColumn(name="compteId")
-	@OneToMany()	
+	
+	@JoinColumn(name="compteId")	
+	@OneToMany(fetch = FetchType.LAZY, cascade={CascadeType.PERSIST,CascadeType.MERGE,
+			CascadeType.REMOVE})	
 	private Collection<Adresse> adresses = new ArrayList<Adresse>();
 	
 	
@@ -58,6 +65,14 @@ public class Compte {
 	
 	
 	
+
+	public Collection<Adresse> getAdresses() {
+		return adresses;
+	}
+
+	public void setAdresses(Collection<Adresse> adresses) {
+		this.adresses = adresses;
+	}
 
 	public LocalDate getAnneeNaissance() {
 		return anneeNaissance;

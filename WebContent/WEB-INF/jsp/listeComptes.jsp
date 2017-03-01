@@ -19,7 +19,11 @@
 	<c:forEach var="compte" items="${comptes}">
 	<tr>
 		<td>${compte.mail}</td><td> ${compte.nom }</td><td> ${compte.prenom }</td><td> ${compte.anneeNaissance }</td>
-	
+		<c:if test="${ not empty compte.adresses }">
+		<c:forEach var="adresse" items="${ compte.adresses }" >
+		<td>${ adresse.rue }</td>
+		</c:forEach>
+		</c:if>
 	</tr>	
 	</c:forEach>
 	</table>
