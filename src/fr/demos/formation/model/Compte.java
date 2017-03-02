@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -23,7 +24,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table (name="compte")
 @Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(name="type")
 public class Compte {
+
+	
 
 	@Size(min=1, max=15)
 	private String nom;
@@ -115,5 +119,10 @@ public class Compte {
 	}
 	
 	
+	@Override
+	public String toString() {
+		return "Compte [nom=" + nom + ", prenom=" + prenom + ", age=" + age + ", mail=" + mail + ", anneeNaissance="
+				+ anneeNaissance + ", adresses=" + adresses + "]";
+	}
 	
 }

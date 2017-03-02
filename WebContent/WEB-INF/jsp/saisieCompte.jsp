@@ -11,7 +11,7 @@
 	
 	<h1>ma première JSP Spring !!!!!</h1>
 	
-	<form:form modelAttribute="compte" action="enregistrerCompte.htm" method="POST">
+	<form:form modelAttribute="compte" action="validerCompteAdresse.htm" method="POST">
 		<table>
 		<tr>	
 		<td><form:label path="nom">nom</form:label></td>
